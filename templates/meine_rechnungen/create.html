@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Neue Rechnung{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="title">Titel</label>
+    <input name="title" id="title" value="{{ request.form['title'] }}" required>
+    <label for="amount">Betrag</label>
+    <input name="amount" id="amount" value="{{ request.form['amount'] }}" required>
+    <label for "schuldige">Schuldige</label>
+    <select name="selected_user" multiple>
+      {% for user in users %}
+        <option value="{{ user['id'] }}">{{ user['username'] }}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

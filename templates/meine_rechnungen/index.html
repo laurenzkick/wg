@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ {% for dataset in data %}
+    <article class="index_user">
+      <header><h1> {{ dataset[0] }} </h1></header>
+      <div>
+        <p><h3>Gesamt: {{ dataset[1] }} €</h3></p>
+        <p>An {{dataset[0]}}: {{ dataset[2] }} €</p>
+        <p>Von {{dataset[0]}}: {{ dataset[3] }} €</p>
+        <form method="post">
+          <button type="submit" value="{{dataset[4]}}" name="submit">
+            bezahlen
+          </button>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+{% endblock %}
+

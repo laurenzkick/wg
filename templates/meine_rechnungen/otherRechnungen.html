@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Zu Erhaltende Rechnungen{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% for rechnung in rechnungen %}
+    <article class="rechnung">
+      <header>
+        <div>
+          <h1>{{ rechnung['title'] }}</h1>
+          <div class="about">from {{ rechnung['username'] }} on {{ rechnung['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+        {% if g.user['id'] == rechnung['urheber_id'] %}
+          <a class="action" href="{{ url_for('meine_rechnungen.update', id=rechnung['id']) }}">Bearbeiten</a>
+        {% endif %}
+      </header>
+      <p class="amount">{{ rechnung['amount'] }} €</p>
+    </article>
+    <a class="action" href="{{ url_for('meine_rechnungen.update', id=rechnung['id']) }}">Bearbeiten</a>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

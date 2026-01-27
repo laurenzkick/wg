@@ -1,4 +1,4 @@
-from flaskr.db import get_db
+from wg.db import get_db
 
 def get_id(obj):
     return obj['id']

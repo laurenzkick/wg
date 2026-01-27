@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Historie{% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+        <hr>
+    {% for rechnung in offeneRechnungen %}
+        <article class="rechnung" >
+            <header>
+                <div class="about">an {{rechnung['username'] }} bzgl {{rechnung['title']}} : {{rechnung['amount']}} €  
+                    vom {{ rechnung['created'].strftime('%Y-%m-%d') }}</div>
+            </header>
+        </article>
+        
+        <hr>
+        
+    {% endfor %}
+    <hr>
+    {% for rechnung in otherRechnungen %}
+        <article class="rechnung">
+            <header>
+                <div class="about">von {{rechnung['username'] }} bzgl {{rechnung['title']}} : {{rechnung['amount']}} €  
+                    vom {{ rechnung['created'].strftime('%Y-%m-%d') }}</div>
+            </header>
+        </article>
+        
+        <hr>
+        
+    {% endfor %}
+{% endblock %}
+
+
