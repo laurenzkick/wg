@@ -3,9 +3,9 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
-from flaskr.helper import find_all_users, find_all_other_users, find_all_other_users_id, pay_all_debts
+from wg.auth import login_required
+from wg.db import get_db
+from wg.helper import find_all_users, find_all_other_users, find_all_other_users_id, pay_all_debts
 
 import sqlite3
 
