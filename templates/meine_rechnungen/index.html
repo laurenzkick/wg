@@ -8,7 +8,7 @@
         <p><h3>Gesamt: {{ dataset[1] }} €</h3></p>
         <p>An {{dataset[0]}}: {{ dataset[2] }} €</p>
         <p>Von {{dataset[0]}}: {{ dataset[3] }} €</p>
-        <form method="post">
+        <form method="post" onsubmit="return confirm('Sicher?')">
           <button type="submit" value="{{dataset[4]}}" name="submit">
             bezahlen
           </button>
