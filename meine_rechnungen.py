@@ -37,6 +37,7 @@ def index():
 @bp.route('/otherRechnungen', methods = ['GET'])
 @login_required
 def otherRechnungen():
+    str_filter = request.args.get("str_filter","") 
     id = g.user['id']
     db = get_db()
     rechnungen = "" #k.a ob ich das brauche, manchmal existiert rechnungen nicht und es kommt zum error
@@ -44,8 +45,9 @@ def otherRechnungen():
         rechnungen = db.execute(
         'SELECT amount, title, created, username, rechnung.id, user.id FROM rechnung '
         'JOIN user ON rechnung.schuldiger_id = user.id '  
-        'WHERE urheber_id = ?',
-        (id,)   # komma um es als tupel zu kennzeichnen
+        'WHERE urheber_id = ? AND title LIKE ?'
+        ,
+        (id,f"%{str_filter}%",)   # komma um es als tupel zu kennzeichnen
     ).fetchall()
 
     except sqlite3.Error as e:
@@ -56,6 +58,7 @@ def otherRechnungen():
 @bp.route('/meineRechnungen', methods = ['GET'])
 @login_required
 def meineRechnungen():
+    str_filter = request.args.get("str_filter","")
     id = g.user['id']
     db = get_db()
     rechnungen = "" #k.a ob ich das brauche, manchmal existiert rechnungen nicht und es kommt zum error
@@ -63,8 +66,8 @@ def meineRechnungen():
         rechnungen = db.execute(
             'SELECT amount, title, created, username, rechnung.id, user.id FROM rechnung '
             'JOIN user ON rechnung.urheber_id = user.id '
-            'WHERE schuldiger_id = ?',
-            (id,) # komma um es als tupel zu kennzeichnen
+            'WHERE schuldiger_id = ? AND title LIKE ?',
+            (id,f"%{str_filter}%",) # komma um es als tupel zu kennzeichnen
         ).fetchall()
 
     except sqlite3.Error as e:

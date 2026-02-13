@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+  <form method="get" action="">
+    <input name="str_filter" 
+    value="{{ request.args.get('str_filter', '') }}">
+    <button type="submit">Filter</button>
+  </form>
   {% for rechnung in rechnungen %}
     <article class="rechnung">
       <header>
